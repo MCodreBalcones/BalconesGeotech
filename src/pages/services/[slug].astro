@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { service } = Astro.props;
-const { Content } = await service.render();
+const { html } = await service.render?.() || { html: '' };
 ---
 
 <BaseLayout title={service.data.title} description={service.data.description}>
@@ -34,9 +34,7 @@ const { Content } = await service.render();
           <p class="lead">{service.data.description}</p>
         </header>
 
-        <div class="content">
-          <Content />
-        </div>
+        <div class="content" set:html={html} />
       </article>
     </div>
   </div>
