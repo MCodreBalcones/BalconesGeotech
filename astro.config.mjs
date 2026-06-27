@@ -2,9 +2,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  // GitHub Pages site URL
-  site: 'https://MCodreBalcones.github.io/',
-  base: '/BalconesGeotech/',
+  // Custom domain URL
+  site: 'https://balconesgeotech.com',
   
   // Static output for GitHub Pages
   output: 'static',
