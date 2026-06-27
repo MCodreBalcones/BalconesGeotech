@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: https://MCodreBalcones.github.io/BalconesGeotech/sitemap.xml
+Sitemap: https://balconesgeotech.com/sitemap.xml

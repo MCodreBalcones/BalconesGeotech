@@ -24,7 +24,7 @@ const displayProjects = featuredProjects.length > 0 ? featuredProjects : project
     description="We deliver comprehensive geotechnical engineering services with proven expertise in site investigation, forensic analysis, and infrastructure design."
     cta={{
       text: 'Explore Our Services',
-      href: '/BalconesGeotech/services',
+      href: '/services',
     }}
     background="primary"
   />
@@ -43,7 +43,7 @@ const displayProjects = featuredProjects.length > 0 ? featuredProjects : project
               title={service.data.title}
               description={service.data.description}
               icon={service.data.icon}
-              href={`/BalconesGeotech/services/${service.data.slug}`}
+              href={`/services/${service.data.slug}`}
             />
           ))
         }
@@ -66,14 +66,14 @@ const displayProjects = featuredProjects.length > 0 ? featuredProjects : project
               description={project.data.shortDescription || project.data.description}
               image={project.data.image}
               category={project.data.category}
-              href={`/BalconesGeotech/projects/${project.data.slug}`}
+              href={`/projects/${project.data.slug}`}
             />
           ))
         }
       </div>
 
       <div style="text-align: center; margin-top: var(--space-3xl);">
-        <a href="/BalconesGeotech/projects" class="btn btn-primary">View All Projects</a>
+        <a href="/projects" class="btn btn-primary">View All Projects</a>
       </div>
     </div>
   </section>
@@ -84,12 +84,12 @@ const displayProjects = featuredProjects.length > 0 ? featuredProjects : project
     buttons={[
       {
         text: 'Get in Touch',
-        href: '/BalconesGeotech/contact',
+        href: '/contact',
         variant: 'accent',
       },
       {
         text: 'Learn More',
-        href: '/BalconesGeotech/services',
+        href: '/services',
         variant: 'secondary',
       },
     ]}
