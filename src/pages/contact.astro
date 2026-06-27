@@ -1,0 +1,304 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+
+interface ContactInfo {
+  label: string;
+  value: string;
+  href?: string;
+  type: 'phone' | 'email' | 'address';
+}
+
+const contactInfo: ContactInfo[] = [
+  {
+    label: 'Office',
+    value: '(512) 380-9969',
+    href: 'tel:+15123809969',
+    type: 'phone',
+  },
+  {
+    label: 'Mobile (Rebecca)',
+    value: '(512) 848-4735',
+    href: 'tel:+15128484735',
+    type: 'phone',
+  },
+  {
+    label: 'Mobile (John)',
+    value: '(512) 486-9654',
+    href: 'tel:+15124869654',
+    type: 'phone',
+  },
+  {
+    label: 'Email (Rebecca)',
+    value: 'rrusso@balconesgeotech.com',
+    href: 'mailto:rrusso@balconesgeotech.com',
+    type: 'email',
+  },
+  {
+    label: 'Email (John)',
+    value: 'jwooley@balconesgeotech.com',
+    href: 'mailto:jwooley@balconesgeotech.com',
+    type: 'email',
+  },
+  {
+    label: 'Physical Address',
+    value: '720 S Bell Blvd, Unit 6A, Cedar Park, TX 78613',
+    type: 'address',
+  },
+  {
+    label: 'Mailing Address',
+    value: 'PO Box 29958, Austin, TX 78755',
+    type: 'address',
+  },
+  {
+    label: 'Firm Registration',
+    value: 'TBPE Firm Reg. F-15624',
+    type: 'address',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact Us"
+  description="Contact Balcones Geotechnical to discuss your project and geotechnical engineering needs."
+>
+  <Hero
+    title="Contact Us"
+    subtitle="Let's Connect"
+    description="We would love to hear more about your geotechnical project. Reach out to our team to get started."
+    background="primary"
+  />
+
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-info-box">
+          <h2>Get In Touch</h2>
+          <p>We're here to help. Contact us for a consultation or to discuss your geotechnical engineering needs.</p>
+
+          <div class="info-list">
+            {
+              contactInfo.map((info) => (
+                <div class="info-item">
+                  <strong>{info.label}</strong>
+                  {info.href ? (
+                    <a href={info.href}>{info.value}</a>
+                  ) : (
+                    <p>{info.value}</p>
+                  )}
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="office-hours">
+            <h3>Office Hours</h3>
+            <p>Monday - Friday: 8:00 AM - 5:00 PM CST</p>
+            <p>Saturday & Sunday: Closed</p>
+          </div>
+        </div>
+
+        <div class="map-box">
+          <h2>Location</h2>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3441.4299839347656!2d-97.74306!3d30.26789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8645b50c3c1b0001%3A0x8c1b0001c1b0001!2sAustin%2C%20TX!5e0!3m2!1sen!2sus!4v1234567890"
+              width="100%"
+              height="400"
+              style="border: 0; border-radius: var(--radius-lg);"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-methods">
+    <div class="container">
+      <h2>Preferred Contact Methods</h2>
+      <div class="methods-grid">
+        <div class="method-card">
+          <h3>📧 Email</h3>
+          <p>
+            For project inquiries:
+            <a href="mailto:rrusso@balconesgeotech.com">rrusso@balconesgeotech.com</a>
+            {' '}or{' '}
+            <a href="mailto:jwooley@balconesgeotech.com">jwooley@balconesgeotech.com</a>
+          </p>
+        </div>
+
+        <div class="method-card">
+          <h3>📞 Phone</h3>
+          <p>
+            Office and direct contacts:
+            <a href="tel:+15123809969">(512) 380-9969</a>
+            {' '}|{' '}
+            <a href="tel:+15128484735">(512) 848-4735</a>
+            {' '}|{' '}
+            <a href="tel:+15124869654">(512) 486-9654</a>
+          </p>
+        </div>
+
+        <div class="method-card">
+          <h3>📍 Visit Us</h3>
+          <p>720 S Bell Blvd, Unit 6A, Cedar Park, TX 78613 (by appointment preferred)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-section {
+    padding: var(--space-4xl) 0;
+  }
+
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4xl);
+    align-items: start;
+  }
+
+  .contact-info-box {
+    padding: var(--space-2xl);
+    background-color: var(--color-lighter-gray);
+    border-radius: var(--radius-lg);
+  }
+
+  .contact-info-box h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-info-box p {
+    color: var(--color-gray);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .info-list {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .info-item {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-light-gray);
+  }
+
+  .info-item:last-child {
+    border-bottom: none;
+  }
+
+  .info-item strong {
+    display: block;
+    color: var(--color-primary);
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .info-item a,
+  .info-item p {
+    margin: 0;
+    font-size: var(--font-size-base);
+    color: var(--color-dark-gray);
+  }
+
+  .info-item a {
+    color: var(--color-primary);
+  }
+
+  .office-hours {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-2xl);
+    border-top: 2px solid var(--color-light-gray);
+  }
+
+  .office-hours h3 {
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-sm);
+  }
+
+  .office-hours p {
+    margin: var(--space-xs) 0;
+    color: var(--color-gray);
+  }
+
+  .map-box h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .map-container {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .contact-methods {
+    padding: var(--space-4xl) 0;
+    background-color: var(--color-lighter-gray);
+  }
+
+  .contact-methods h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-3xl);
+    text-align: center;
+  }
+
+  .methods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-2xl);
+  }
+
+  .method-card {
+    padding: var(--space-2xl);
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-light-gray);
+  }
+
+  .method-card h3 {
+    color: var(--color-primary);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-md);
+  }
+
+  .method-card p {
+    margin: 0;
+    color: var(--color-dark-gray);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .method-card a {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  @media (max-width: 768px) {
+    .contact-section,
+    .contact-methods {
+      padding: var(--space-2xl) 0;
+    }
+
+    .contact-wrapper {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .map-container {
+      height: 300px;
+    }
+
+    .methods-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

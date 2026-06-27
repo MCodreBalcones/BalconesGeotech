@@ -1,0 +1,141 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import CTA from '@components/CTA.astro';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
+const projects = await getCollection('projects');
+
+// Get featured projects if they exist
+const featuredProjects = projects.filter((p) => p.data.featured).slice(0, 3);
+const displayProjects = featuredProjects.length > 0 ? featuredProjects : projects.slice(0, 3);
+---
+
+<BaseLayout
+  title="Professional Geotechnical Engineering Services"
+  description="Balcones Geotech provides expert geotechnical engineering, site investigation, forensic analysis, and pavement engineering services."
+>
+  <Hero
+    title="Geotechnical Solutions You Can Trust"
+    subtitle="Expert Engineering Services for Infrastructure Projects"
+    description="We deliver comprehensive geotechnical engineering services with proven expertise in site investigation, forensic analysis, and infrastructure design."
+    cta={{
+      text: 'Explore Our Services',
+      href: '/BalconesGeotech/services',
+    }}
+    background="primary"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Services</h2>
+        <p>Comprehensive geotechnical solutions tailored to your project needs</p>
+      </div>
+
+      <div class="cards-grid">
+        {
+          services.slice(0, 4).map((service) => (
+            <ServiceCard
+              title={service.data.title}
+              description={service.data.description}
+              icon={service.data.icon}
+              href={`/BalconesGeotech/services/${service.data.slug}`}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Projects</h2>
+        <p>Showcasing our successful project completions across multiple sectors</p>
+      </div>
+
+      <div class="cards-grid">
+        {
+          displayProjects.map((project) => (
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.shortDescription || project.data.description}
+              image={project.data.image}
+              category={project.data.category}
+              href={`/BalconesGeotech/projects/${project.data.slug}`}
+            />
+          ))
+        }
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-3xl);">
+        <a href="/BalconesGeotech/projects" class="btn btn-primary">View All Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Ready to Start Your Project?"
+    description="Contact our team to discuss your geotechnical engineering needs and how we can help."
+    buttons={[
+      {
+        text: 'Get in Touch',
+        href: '/BalconesGeotech/contact',
+        variant: 'accent',
+      },
+      {
+        text: 'Learn More',
+        href: '/BalconesGeotech/services',
+        variant: 'secondary',
+      },
+    ]}
+    background="secondary"
+  />
+</BaseLayout>
+
+<style>
+  .section {
+    padding: var(--space-4xl) 0;
+  }
+
+  .section-alt {
+    background-color: var(--color-lighter-gray);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .section-header h2 {
+    margin-bottom: var(--space-md);
+    color: var(--color-primary);
+  }
+
+  .section-header p {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-2xl);
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding: var(--space-2xl) 0;
+    }
+
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

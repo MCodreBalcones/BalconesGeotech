@@ -1,0 +1,41 @@
+---
+import '../styles/base.css';
+import Navigation from '@components/Navigation.astro';
+import Footer from '@components/Footer.astro';
+import SEO from '@components/SEO.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const { title, description, image, canonical, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <SEO title={title} description={description} image={image} canonical={canonical} noindex={noindex} />
+    <link rel="icon" type="image/svg+xml" href="/BalconesGeotech/favicon.svg" />
+    <slot name="head" />
+  </head>
+  <body>
+    <Navigation />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  main {
+    min-height: calc(100vh - 200px);
+  }
+</style>

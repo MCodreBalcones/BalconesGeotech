@@ -1,0 +1,88 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import ServiceCard from '@components/ServiceCard.astro';
+import CTA from '@components/CTA.astro';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
+const sortedServices = services.sort((a, b) => (a.data.order || 999) - (b.data.order || 999));
+---
+
+<BaseLayout
+  title="Our Services"
+  description="Explore our comprehensive geotechnical engineering services including site investigation, forensic analysis, and pavement engineering."
+>
+  <Hero
+    title="Professional Geotechnical Services"
+    subtitle="Expertise You Can Count On"
+    description="We provide a full range of geotechnical engineering services to meet your project requirements."
+    background="primary"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Our Service Offerings</h2>
+      </div>
+
+      <div class="services-grid">
+        {
+          sortedServices.map((service) => (
+            <ServiceCard
+              title={service.data.title}
+              description={service.data.description}
+              icon={service.data.icon}
+              href={`/BalconesGeotech/services/${service.data.slug}`}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Need a Specific Solution?"
+    description="Contact us to discuss your project requirements and how we can assist."
+    buttons={[
+      {
+        text: 'Contact Us',
+        href: '/BalconesGeotech/contact',
+        variant: 'accent',
+      },
+    ]}
+    background="primary"
+  />
+</BaseLayout>
+
+<style>
+  .section {
+    padding: var(--space-4xl) 0;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .section-header h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-2xl);
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding: var(--space-2xl) 0;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

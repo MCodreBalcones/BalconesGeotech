@@ -1,0 +1,88 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import CTA from '@components/CTA.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a, b) => {
+  const dateA = a.data.date?.getTime() || 0;
+  const dateB = b.data.date?.getTime() || 0;
+  return dateB - dateA;
+});
+---
+
+<BaseLayout
+  title="Our Projects"
+  description="Explore our portfolio of successful geotechnical engineering projects across transportation, public sector, infrastructure, and energy sectors."
+>
+  <Hero
+    title="Featured Projects"
+    subtitle="Proven Success Across Multiple Sectors"
+    description="View our portfolio of completed projects showcasing our expertise in geotechnical engineering."
+    background="primary"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="category-section">
+        <h2>All Projects</h2>
+        <div class="projects-grid">
+          {
+            sortedProjects.map((project) => (
+              <ProjectCard
+                title={project.data.title}
+                description={project.data.shortDescription || project.data.description}
+                image={project.data.image}
+                category={project.data.category}
+                href={`/BalconesGeotech/projects/${project.data.slug}`}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Let's Discuss Your Project"
+    description="Ready to work with us? Contact our team to learn how we can help."
+    buttons={[
+      {
+        text: 'Contact Us',
+        href: '/BalconesGeotech/contact',
+        variant: 'accent',
+      },
+    ]}
+    background="secondary"
+  />
+</BaseLayout>
+
+<style>
+  .section {
+    padding: var(--space-4xl) 0;
+  }
+
+  .category-section h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-3xl);
+    text-align: center;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-2xl);
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding: var(--space-2xl) 0;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

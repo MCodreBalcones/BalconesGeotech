@@ -1,0 +1,109 @@
+---
+interface CTAButton {
+  text: string;
+  href: string;
+  variant?: 'primary' | 'accent' | 'secondary';
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  buttons?: CTAButton[];
+  background?: 'primary' | 'secondary' | 'accent';
+}
+
+const { title, description, buttons, background = 'primary' } = Astro.props;
+---
+
+<section class="cta" data-bg={background}>
+  <div class="container">
+    <div class="cta-content">
+      <h2>{title}</h2>
+      {description && <p>{description}</p>}
+      {
+        buttons && buttons.length > 0 && (
+          <div class="cta-buttons">
+            {buttons.map((button) => (
+              <a href={button.href} class:list={['btn', `btn-${button.variant || 'accent'}`]}>
+                {button.text}
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding: var(--space-4xl) 0;
+    text-align: center;
+  }
+
+  .cta[data-bg='primary'] {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+  }
+
+  .cta[data-bg='secondary'] {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+    color: var(--color-white);
+  }
+
+  .cta[data-bg='accent'] {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    color: var(--color-black);
+  }
+
+  .cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta h2 {
+    color: inherit;
+    margin-bottom: var(--space-lg);
+  }
+
+  .cta p {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-2xl);
+    opacity: 0.95;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta .btn {
+    font-size: var(--font-size-base);
+  }
+
+  @media (max-width: 768px) {
+    .cta {
+      padding: var(--space-2xl) 0;
+    }
+
+    .cta h2 {
+      font-size: var(--font-size-3xl);
+    }
+
+    .cta p {
+      font-size: var(--font-size-base);
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .cta .btn {
+      width: 100%;
+    }
+  }
+</style>

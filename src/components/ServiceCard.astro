@@ -1,0 +1,104 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+  image?: string;
+  href?: string;
+}
+
+const { title, description, icon, image, href } = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag class="service-card" href={href}>
+  {image && <div class="card-image"><img src={image} alt={title} /></div>}
+  {icon && <div class="card-icon">{icon}</div>}
+  <div class="card-content">
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+  {href && <div class="card-arrow">→</div>}
+</Tag>
+
+<style>
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-light-gray);
+    transition: all var(--transition-base);
+    text-decoration: none;
+  }
+
+  a.service-card {
+    cursor: pointer;
+  }
+
+  a.service-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .card-image {
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    height: 200px;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-base);
+  }
+
+  a.service-card:hover .card-image img {
+    transform: scale(1.05);
+  }
+
+  .card-icon {
+    font-size: var(--font-size-4xl);
+    line-height: 1;
+  }
+
+  .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .card-content h3 {
+    margin: 0;
+    color: var(--color-primary);
+    transition: color var(--transition-fast);
+  }
+
+  a.service-card:hover .card-content h3 {
+    color: var(--color-primary-dark);
+  }
+
+  .card-content p {
+    margin: 0;
+    color: var(--color-gray);
+    flex: 1;
+  }
+
+  .card-arrow {
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    transition: transform var(--transition-fast);
+    opacity: 0;
+  }
+
+  a.service-card:hover .card-arrow {
+    transform: translateX(4px);
+    opacity: 1;
+  }
+</style>

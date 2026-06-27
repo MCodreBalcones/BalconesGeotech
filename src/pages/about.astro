@@ -1,0 +1,215 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import TeamCard from '@components/TeamCard.astro';
+import CTA from '@components/CTA.astro';
+import { getCollection } from 'astro:content';
+
+const team = await getCollection('team');
+---
+
+<BaseLayout
+  title="About Us"
+  description="Learn about Balcones Geotechnical, our leadership team, and our certifications and pre-qualifications."
+>
+  <Hero
+    title="About Balcones Geotech"
+    subtitle="Expert Professionals You Can Trust"
+    description="Balcones Geotechnical is a Central Texas engineering firm specializing in complex geotechnical projects for public and private sector clients."
+    background="primary"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-intro">
+        <h2>Who We Are</h2>
+        <p>
+          Serving both the public and private sectors, Balcones Geotechnical brings extensive knowledge of the
+          complex geology of the Austin and San Antonio region to support civil design and construction projects.
+        </p>
+        <p>
+          Principal John A. Wooley founded the firm in 2013 following a distinguished career with Fugro Consultants.
+          Our staff excels at delivering practical, technically sound solutions on projects locally, regionally, and statewide.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Meet Our Team</h2>
+      <div class="team-grid">
+        {
+          team.map((member) => (
+            <TeamCard
+              name={member.data.name}
+              role={member.data.role}
+              image={member.data.image}
+              bio={member.data.bio}
+              certifications={member.data.certifications}
+              email={member.data.email}
+              phone={member.data.phone}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="certifications-section">
+        <h2>Certifications & Affiliations</h2>
+        <div class="certifications-grid">
+          <div class="cert-item">
+            <h3>Business Certifications</h3>
+            <ul>
+              <li>Woman-owned Business Enterprise (WBE)</li>
+              <li>Small Business Enterprise (SBE)</li>
+              <li>Disadvantaged Business Enterprise (DBE)</li>
+            </ul>
+          </div>
+
+          <div class="cert-item">
+            <h3>Firm Registration</h3>
+            <ul>
+              <li>Texas Board of Professional Engineers - Firm Registration No. F-15624</li>
+              <li>Texas Department of Transportation Pre-certifications</li>
+              <li>Firm Sequence Number: 00003990</li>
+            </ul>
+          </div>
+
+          <div class="cert-item">
+            <h3>TxDOT Categories</h3>
+            <ul>
+              <li>11.1.1 Roadway Construction Management and Inspection</li>
+              <li>12.1.1 Asphaltic Concrete Production</li>
+              <li>12.1.2 Portland Cement Concrete</li>
+              <li>12.2.1 Concrete Plant Inspection and Testing</li>
+              <li>14.1.1 Soil Exploration</li>
+              <li>14.2.1 Geotechnical Testing</li>
+              <li>14.3.1 Transportation Foundation Studies</li>
+              <li>14.4.1 Building Foundation Studies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Ready to Work With Us?"
+    description="Let our experienced team handle your next geotechnical engineering project."
+    buttons={[
+      {
+        text: 'Contact Us',
+        href: '/BalconesGeotech/contact',
+        variant: 'accent',
+      },
+      {
+        text: 'View Our Services',
+        href: '/BalconesGeotech/services',
+        variant: 'secondary',
+      },
+    ]}
+    background="secondary"
+  />
+</BaseLayout>
+
+<style>
+  .section {
+    padding: var(--space-4xl) 0;
+  }
+
+  .section-alt {
+    background-color: var(--color-lighter-gray);
+  }
+
+  .section-intro {
+    max-width: 800px;
+    margin: 0 auto var(--space-3xl);
+    text-align: center;
+  }
+
+  .section-intro h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .section-intro p {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-lg);
+  }
+
+  .section h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-3xl);
+    text-align: center;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-2xl);
+  }
+
+  .certifications-section {
+    margin: 0 auto;
+  }
+
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-2xl);
+  }
+
+  .cert-item {
+    padding: var(--space-2xl);
+    background-color: var(--color-white);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--color-primary);
+  }
+
+  .cert-item h3 {
+    color: var(--color-primary);
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-lg);
+  }
+
+  .cert-item ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cert-item li {
+    padding: var(--space-xs) 0;
+    color: var(--color-dark-gray);
+    position: relative;
+    padding-left: var(--space-lg);
+  }
+
+  .cert-item li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .section {
+      padding: var(--space-2xl) 0;
+    }
+
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .certifications-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

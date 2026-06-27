@@ -1,0 +1,164 @@
+---
+interface Props {
+  name: string;
+  role: string;
+  image?: string;
+  bio?: string;
+  certifications?: string[];
+  email?: string;
+  phone?: string;
+}
+
+const { name, role, image, bio, certifications, email, phone } = Astro.props;
+---
+
+<div class="team-card">
+  {image && <div class="card-image"><img src={image} alt={name} /></div>}
+  <div class="card-content">
+    <h3>{name}</h3>
+    <p class="role">{role}</p>
+    {bio && <p class="bio">{bio}</p>}
+    {
+      certifications && certifications.length > 0 && (
+        <div class="certifications">
+          <strong>Certifications:</strong>
+          <ul>
+            {certifications.map((cert) => (
+              <li>{cert}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+    <div class="contact-info">
+      {email && (
+        <a href={`mailto:${email}`} class="contact-link">
+          📧 Email
+        </a>
+      )}
+      {phone && (
+        <a href={`tel:${phone}`} class="contact-link">
+          📞 Call
+        </a>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .team-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-light-gray);
+    transition: box-shadow var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .team-card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  .card-image {
+    overflow: hidden;
+    height: 300px;
+    background-color: var(--color-light-gray);
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: var(--space-lg);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .card-content h3 {
+    margin: 0;
+    color: var(--color-primary);
+    font-size: var(--font-size-xl);
+  }
+
+  .role {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .bio {
+    margin: var(--space-sm) 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-gray);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .certifications {
+    margin: var(--space-md) 0;
+    padding: var(--space-md);
+    background-color: var(--color-lighter-gray);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .certifications strong {
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .certifications ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .certifications li {
+    margin: var(--space-xs) 0;
+    color: var(--color-dark-gray);
+    padding-left: var(--space-md);
+    position: relative;
+  }
+
+  .certifications li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+    font-weight: bold;
+  }
+
+  .contact-info {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: auto;
+  }
+
+  .contact-link {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    text-align: center;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-md);
+  }
+
+  .contact-link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+</style>

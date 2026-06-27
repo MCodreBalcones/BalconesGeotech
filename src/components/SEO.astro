@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const { title, description, image, canonical, noindex } = Astro.props;
+
+const siteTitle = 'Balcones Geotech';
+const fullTitle = `${title} | ${siteTitle}`;
+const siteDescription =
+  'Professional geotechnical engineering services including site investigation, forensic analysis, and pavement engineering.';
+const siteImage = 'https://MCodreBalcones.github.io/BalconesGeotech/og-image.png';
+const siteUrl = 'https://MCodreBalcones.github.io/BalconesGeotech/';
+
+const finalDescription = description || siteDescription;
+const finalImage = image || siteImage;
+const finalCanonical = canonical || siteUrl;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={finalDescription} />
+<meta name="theme-color" content="#008b8b" />
+
+{/* Open Graph */}
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={finalDescription} />
+<meta property="og:image" content={finalImage} />
+<meta property="og:url" content={finalCanonical} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteTitle} />
+
+{/* Twitter Card */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={finalDescription} />
+<meta name="twitter:image" content={finalImage} />
+
+{/* Canonical */}
+<link rel="canonical" href={finalCanonical} />
+
+{/* robots.txt */}
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+{/* Preconnect */}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
