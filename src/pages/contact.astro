@@ -313,4 +313,34 @@ const contactInfo: ContactInfo[] = [
       padding: var(--space-xl);
     }
   }
+
+  @media (prefers-color-scheme: dark) {
+    .contact-info-box {
+      background-color: var(--color-light-gray);
+    }
+
+    .contact-info-box p {
+      color: #c0c0c0;
+    }
+
+    .info-item p {
+      color: #f5f5f5;
+    }
+
+    .info-item strong {
+      color: var(--color-primary-light);
+    }
+
+    .office-hours p {
+      color: #c0c0c0;
+    }
+
+    .office-hours h3 {
+      color: var(--color-primary-light);
+    }
+
+    .info-item {
+      border-bottom-color: #3a3a3a;
+    }
+  }
 </style>
