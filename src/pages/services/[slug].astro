@@ -23,7 +23,7 @@ const { html } = await service.render?.() || { html: '' };
   <div class="service-detail">
     <div class="container">
       <div class="breadcrumb">
-        <a href="/BalconesGeotech/services">Services</a>
+        <a href="/services">Services</a>
         <span>/</span>
         <span>{service.data.title}</span>
       </div>
@@ -45,12 +45,12 @@ const { html } = await service.render?.() || { html: '' };
     buttons={[
       {
         text: 'Contact Us',
-        href: '/BalconesGeotech/contact',
+        href: '/contact',
         variant: 'accent',
       },
       {
         text: 'View Other Services',
-        href: '/BalconesGeotech/services',
+        href: '/services',
         variant: 'secondary',
       },
     ]}

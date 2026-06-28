@@ -33,7 +33,7 @@ const sortedServices = services.sort((a, b) => (a.data.order || 999) - (b.data.o
               title={service.data.title}
               description={service.data.description}
               icon={service.data.icon}
-              href={`/BalconesGeotech/services/${service.data.slug}`}
+              href={`/services/${service.data.slug}`}
             />
           ))
         }
@@ -47,7 +47,7 @@ const sortedServices = services.sort((a, b) => (a.data.order || 999) - (b.data.o
     buttons={[
       {
         text: 'Contact Us',
-        href: '/BalconesGeotech/contact',
+        href: '/contact',
         variant: 'accent',
       },
     ]}

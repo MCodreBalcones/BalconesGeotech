@@ -36,7 +36,7 @@ const sortedProjects = projects.sort((a, b) => {
                 description={project.data.shortDescription || project.data.description}
                 image={project.data.image}
                 category={project.data.category}
-                href={`/BalconesGeotech/projects/${project.data.slug}`}
+              href={`/projects/${project.data.slug}`}
               />
             ))
           }
@@ -51,7 +51,7 @@ const sortedProjects = projects.sort((a, b) => {
     buttons={[
       {
         text: 'Contact Us',
-        href: '/BalconesGeotech/contact',
+        href: '/contact',
         variant: 'accent',
       },
     ]}
