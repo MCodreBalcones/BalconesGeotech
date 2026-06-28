@@ -11,14 +11,15 @@ const navItems: NavItem[] = [
   { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
+
 ---
 
 <header class="navigation">
   <div class="nav-container">
     <div class="nav-wrapper">
       <div class="logo">
-        <a href="/">
-          <span class="logo-text">Balcones Geotech</span>
+        <a href="/" aria-label="Balcones Geotech home">
+          <img src="/images/CompanyNameLogo.jpg" alt="Balcones Geotech" class="brand-logo" />
         </a>
       </div>
       <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" id="mobile-menu-btn">
@@ -121,10 +122,11 @@ const navItems: NavItem[] = [
     color: var(--color-black);
   }
 
-  .logo-text {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
+  .brand-logo {
+    height: 62px;
+    width: auto;
+    max-width: 360px;
+    object-fit: contain;
   }
 
   .mobile-menu-btn {
@@ -206,6 +208,11 @@ const navItems: NavItem[] = [
 
   /* Mobile Responsive */
   @media (max-width: 768px) {
+    .brand-logo {
+      height: 48px;
+      max-width: 250px;
+    }
+
     .mobile-menu-btn {
       display: flex;
     }

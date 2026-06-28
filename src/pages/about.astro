@@ -6,6 +6,19 @@ import CTA from '@components/CTA.astro';
 import { getCollection } from 'astro:content';
 
 const team = await getCollection('team');
+
+const teamOrder = {
+  'john-wooley': 0,
+  'rebecca-russo': 1,
+  'kevin-mandeville-2': 2,
+  'andrew-brown': 3,
+};
+
+const orderedTeam = [...team].sort((a, b) => {
+  const aOrder = teamOrder[a.data.slug] ?? 99;
+  const bOrder = teamOrder[b.data.slug] ?? 99;
+  return aOrder - bOrder;
+});
 ---
 
 <BaseLayout
@@ -40,7 +53,7 @@ const team = await getCollection('team');
       <h2>Meet Our Team</h2>
       <div class="team-grid">
         {
-          team.map((member) => (
+          orderedTeam.map((member) => (
             <TeamCard
               name={member.data.name}
               role={member.data.role}
@@ -151,8 +164,20 @@ const team = await getCollection('team');
 
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
     gap: var(--space-2xl);
+  }
+
+  @media (max-width: 1200px) {
+    .team-grid {
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+    }
+  }
+
+  @media (max-width: 800px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .certifications-section {

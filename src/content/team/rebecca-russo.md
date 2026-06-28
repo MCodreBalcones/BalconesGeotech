@@ -2,6 +2,7 @@
 name: Rebecca A. Russo, P.E.
 slug: rebecca-russo
 role: President
+image: /images/RebeccaRussoHeadshot.jpg
 bio: Rebecca Russo has more than 30 years of experience in geotechnical investigations, design, construction phase testing, and forensic engineering.
 certifications:
   - "Registered Professional Engineer: Texas"

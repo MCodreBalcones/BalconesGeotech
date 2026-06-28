@@ -2,6 +2,7 @@
 name: Kevin P. Mandeville, P.G.
 slug: kevin-mandeville-2
 role: Vice President
+image: /images/KevinMandevilleHeadshot.jpg
 bio: Kevin Mandeville has more than 25 years of experience in geotechnical and geological applications for tunneling and commercial construction.
 certifications:
   - "Registered Professional Geologist: Texas"

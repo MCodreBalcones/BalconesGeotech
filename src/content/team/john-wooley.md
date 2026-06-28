@@ -2,6 +2,7 @@
 name: John A. Wooley, P.E.
 slug: john-wooley
 role: Founder and Principal Engineer
+image: /images/JohnWooleyHeadshot.jpg
 bio: John Wooley founded Balcones Geotechnical in 2013 after an accomplished career with Fugro Consultants and more than 40 years of geotechnical engineering leadership.
 certifications:
   - "Registered Professional Engineer: Texas"
