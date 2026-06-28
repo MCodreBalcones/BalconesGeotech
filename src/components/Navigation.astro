@@ -41,33 +41,48 @@ const navItems: NavItem[] = [
   </div>
 </header>
 
-<script>
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const navMenu = document.getElementById('nav-menu');
-  const navLinks = navMenu?.querySelectorAll('.nav-link');
+<script is:inline>
+  function initNavigation() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = navMenu?.querySelectorAll('.nav-link');
 
-  // Toggle mobile menu
-  mobileMenuBtn?.addEventListener('click', () => {
-    const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-    mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
-    navMenu?.classList.toggle('active');
-  });
+    if (!mobileMenuBtn || !navMenu) return;
 
-  // Close menu when a link is clicked
-  navLinks?.forEach((link) => {
-    link.addEventListener('click', () => {
-      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
-      navMenu?.classList.remove('active');
+    // Toggle mobile menu
+    mobileMenuBtn.addEventListener('click', () => {
+      const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+      mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
+      navMenu.classList.toggle('active');
     });
-  });
 
-  // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!navMenu?.contains(e.target as Node) && !mobileMenuBtn?.contains(e.target as Node)) {
-      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
-      navMenu?.classList.remove('active');
-    }
-  });
+    // Close menu when a link is clicked
+    navLinks?.forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    const handleClickOutside = (e) => {
+      if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('active');
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavigation);
+  } else {
+    initNavigation();
+  }
+
+  // Re-initialize on view transitions (if using Astro view transitions)
+  document.addEventListener('astro:after-swap', initNavigation);
 </script>
 
 <style>
