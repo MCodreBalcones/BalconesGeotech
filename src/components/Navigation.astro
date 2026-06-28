@@ -21,7 +21,14 @@ const navItems: NavItem[] = [
           <span class="logo-text">Balcones Geotech</span>
         </a>
       </div>
-      <nav class="nav-menu">
+      <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" id="mobile-menu-btn">
+        <span class="hamburger">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+      <nav class="nav-menu" id="nav-menu">
         <ul>
           {navItems.map((item) => (
             <li>
@@ -33,6 +40,35 @@ const navItems: NavItem[] = [
     </div>
   </div>
 </header>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const navMenu = document.getElementById('nav-menu');
+  const navLinks = navMenu?.querySelectorAll('.nav-link');
+
+  // Toggle mobile menu
+  mobileMenuBtn?.addEventListener('click', () => {
+    const isOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+    mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
+    navMenu?.classList.toggle('active');
+  });
+
+  // Close menu when a link is clicked
+  navLinks?.forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+      navMenu?.classList.remove('active');
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!navMenu?.contains(e.target as Node) && !mobileMenuBtn?.contains(e.target as Node)) {
+      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+      navMenu?.classList.remove('active');
+    }
+  });
+</script>
 
 <style>
   .navigation {
@@ -68,6 +104,42 @@ const navItems: NavItem[] = [
     color: var(--color-primary);
   }
 
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+    gap: var(--space-xs);
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-dark-gray);
+    transition: all var(--transition-fast);
+    border-radius: 1px;
+  }
+
+  .mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
+  }
+
+  .mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
   .nav-menu ul {
     display: flex;
     list-style: none;
@@ -82,6 +154,7 @@ const navItems: NavItem[] = [
     transition: color var(--transition-fast);
     text-decoration: none;
     position: relative;
+    display: block;
   }
 
   .nav-link:hover {
@@ -98,6 +171,57 @@ const navItems: NavItem[] = [
     background-color: var(--color-primary);
     transition: width var(--transition-fast);
   }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .mobile-menu-btn {
+      display: flex;
+    }
+
+    .nav-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: var(--color-white);
+      border-bottom: 1px solid var(--color-light-gray);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-base);
+    }
+
+    .nav-menu.active {
+      max-height: 500px;
+    }
+
+    .nav-menu ul {
+      flex-direction: column;
+      gap: 0;
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .nav-menu li {
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    .nav-menu li:last-child {
+      border-bottom: none;
+    }
+
+    .nav-link {
+      padding: var(--space-md) 0;
+      font-size: var(--font-size-base);
+    }
+
+    .nav-link::after {
+      display: none;
+    }
+  }
+</style>
 
   .nav-link:hover::after {
     width: 100%;
