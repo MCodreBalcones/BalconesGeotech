@@ -110,6 +110,10 @@ a:hover {
   text-decoration: underline;
 }
 
+a.btn:hover {
+  text-decoration: none;
+}
+
 a:focus {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
@@ -118,13 +122,14 @@ a:focus {
 /* Buttons */
 
 button,
-.button {
+.button,
+.btn {
   font-family: inherit;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
   padding: var(--space-md) var(--space-lg);
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   cursor: pointer;
   transition: all var(--transition-fast);
   display: inline-block;
@@ -133,13 +138,15 @@ button,
 }
 
 button:focus,
-.button:focus {
+.button:focus,
+.btn:focus {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
 button:disabled,
-.button:disabled {
+.button:disabled,
+.btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
