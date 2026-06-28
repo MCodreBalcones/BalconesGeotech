@@ -207,6 +207,8 @@ const contactInfo: ContactInfo[] = [
     margin: 0;
     font-size: var(--font-size-base);
     color: var(--color-dark-gray);
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .info-item a {
@@ -275,6 +277,8 @@ const contactInfo: ContactInfo[] = [
     margin: 0;
     color: var(--color-dark-gray);
     line-height: var(--line-height-relaxed);
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .method-card a {
@@ -293,12 +297,20 @@ const contactInfo: ContactInfo[] = [
       gap: var(--space-2xl);
     }
 
+    .contact-info-box {
+      padding: var(--space-lg);
+    }
+
     .map-container {
       height: 300px;
     }
 
     .methods-grid {
       grid-template-columns: 1fr;
+    }
+
+    .method-card {
+      padding: var(--space-lg);
     }
   }
 </style>
